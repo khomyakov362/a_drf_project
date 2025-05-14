@@ -10,7 +10,7 @@ class Command(BaseCommand):
             email='admin@web.top',
             role=models.UserRoles.MODERATOR,
             first_name="Admin",
-            last_name="AdminModerator",
+            last_name="Admin",
             is_staff=True,
             is_superuser=True,
             is_active=True,
