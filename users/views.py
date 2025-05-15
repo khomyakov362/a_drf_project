@@ -31,6 +31,3 @@ class UpdateAPIView(generics.UpdateAPIView):
 class DestroyAPIView(generics.DestroyAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
-
-class TokenObtainPairView(views.TokenObtainPairView):
-    serializer_class = serializers.TokenObtainPairSerializer

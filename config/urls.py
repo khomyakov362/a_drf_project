@@ -14,12 +14,36 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from tkinter.font import names
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
+
+SchemaView = get_schema_view(
+    openapi.Info(
+        title='Animals Quiz API',
+        default_version='v1',
+        description='API for Animals Quiz',
+        terms_of_service='https://policies.google.com/terms',
+        contact=openapi.Contact(email='contact@animals.local'),
+        license=openapi.License(name='BSD License')
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny,]
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls', namespace='users'))
+
+    path('users/', include('users.urls', namespace='users')),
+
+    path('swagger<format>/', SchemaView.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger/', SchemaView.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', SchemaView.with_ui('redoc', cache_timeout=0), name='schema-redoc')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
