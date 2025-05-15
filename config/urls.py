@@ -42,6 +42,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('users/', include('users.urls', namespace='users')),
+    path('', include('sections.urls', namespace='sections')),
 
     path('swagger<format>/', SchemaView.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', SchemaView.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
