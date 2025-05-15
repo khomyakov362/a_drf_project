@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'redis',
-    'users'
+    'users',
+    'sections'
 ]
 
 MIDDLEWARE = [
