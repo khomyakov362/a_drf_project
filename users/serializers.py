@@ -29,10 +29,10 @@ class CreateSerializer(serializers.ModelSerializer):
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'last_name', 'first_name', 'phone', 'password', 'is_active']
-        validators = [
-            PasswordValidator(field='password')
-        ]
+        fields = ['email', 'last_name', 'first_name', 'phone', 'is_active']
+        # validators = [
+        #     PasswordValidator(field='password')
+        # ]
 
 class TokenObtainPairSerializer(TokenObtainSerializer):
     @classmethod

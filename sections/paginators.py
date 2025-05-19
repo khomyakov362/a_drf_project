@@ -7,3 +7,6 @@ class Paginator(PageNumberPagination):
 
 class ContentPaginator(PageNumberPagination):
     page_size = 10
+
+class QuestionPaginator(Paginator):
+    page_size = 5

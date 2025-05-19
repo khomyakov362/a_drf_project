@@ -14,5 +14,5 @@ urlpatterns = [
     path('<int:pk>/update/', never_cache(views.UpdateAPIView.as_view()), name='update'),
     path('<int:pk>/delete/', never_cache(views.DestroyAPIView.as_view()), name='delete'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
