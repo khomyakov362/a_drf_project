@@ -18,4 +18,6 @@ urlpatterns = [
     path('content/<int:pk>/update/', views.ContentUpdateAPIView.as_view(), name='content_update'),
     path('content/<int:pk>/delete/', views.ContentDestroyAPIView.as_view(), name='content_delete'),
     path('content/<int:pk>/', views.ContentRetrieveAPIView.as_view(), name='content_detail'),
+    path('questions/',  views.QuestionListAPIView.as_view(), name='question_list'),
+    path('questions/<int:pk>/', views.QuestionRestrieveAPIView.as_view(), name='question_detail')
 ] + router.urls
