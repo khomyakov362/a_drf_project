@@ -1,6 +1,6 @@
 from users.models import User, UserRoles
 
-def get_admin_user():
+def create_admin_user():
     user = User.objects.create(
         email='test_admin@mail.com',
         role=UserRoles.MODERATOR,
@@ -12,13 +12,13 @@ def get_admin_user():
     user.save()
     return user
 
-def get_member_user():
+def create_member_user():
     user = User.objects.create(
         email='test_member@mail.com',
         role=UserRoles.MEMBER,
         is_active = True,
-        is_superuser=True,
-        is_staff=True,
+        is_superuser=False,
+        is_staff=False,
     )
     user.set_password('querty')
     user.save()
