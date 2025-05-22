@@ -28,7 +28,7 @@ class SectionTestCase(APITestCase):
         self.assertEqual(response.json().get('title'), 'Test Section Create')
 
     def test_02_section_detail(self):
-        response = self.client.get('/section/3/')
+        response = self.client.get(f'/section/{self.test_section.pk}/')
         self.assertEqual(response.json().get('description'), 'Test Description')
         self.assertEqual(response.json().get('title'), 'Test Section')
     
@@ -37,18 +37,18 @@ class SectionTestCase(APITestCase):
             'title' : 'Test Section Update Put',
             'description' : 'Test Description Update Put'
         }
-        response = self.client.put('/section/4/update/', data=data)
+        response = self.client.put(f'/section/{self.test_section.pk}/update/', data=data)
         self.assertEqual(response.json().get('description'), 'Test Description Update Put')
         self.assertEqual(response.json().get('title'), 'Test Section Update Put')
     
     def test_04_section_delete(self):
-        response = self.client.delete('/section/5/delete/')
+        response = self.client.delete(f'/section/{self.test_section.pk}/delete/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
     
     def test_05_section_list(self):
         response = self.client.get('')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json().get('results'), [{'id': 6, 'title': 'Test Section', 'content_title': []}])
+        self.assertEqual(response.json().get('results'), [{'id': self.test_section.pk, 'title': 'Test Section', 'content_title': []}])
     
     def test_06_section_create_forbidden(self):
         create_member_user()
