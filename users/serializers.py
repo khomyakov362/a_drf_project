@@ -29,7 +29,7 @@ class CreateSerializer(serializers.ModelSerializer):
 class UpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'last_name', 'first_name', 'password' 'phone', 'is_active']
+        fields = ['email', 'last_name', 'first_name', 'password', 'phone', 'is_active']
         validators = [
             PasswordValidator(field='password')
         ]
