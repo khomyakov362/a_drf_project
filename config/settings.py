@@ -86,28 +86,48 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-HOST=os.getenv("MS_SQL_SERVER")
-DATABASE=os.getenv("MS_SQL_DATABASE")
-PAD_DATABASE=os.getenv("MS_PAD_DATABASE")
-USER=os.getenv("MS_SQL_USER")
-PASSWORD=os.getenv("MS_SQL_KEY")
-DRIVER=os.getenv("MS_SQL_DRIVER")
+RUN_IN_DOCKER = os.getenv("RUN_IN_DOCKER") == "True"
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': DATABASE,
-        'USER': USER,
-        'PASSWORD': PASSWORD,
-        'HOST': HOST,
-        'PORT': '',
-        'OPTIONS':
-        {
-            'driver':DRIVER,
-            'extra_params' : f'server={HOST}'
+if not RUN_IN_DOCKER:
+    HOST=os.getenv("MS_SQL_SERVER")
+    DATABASE=os.getenv("MS_SQL_DATABASE")
+    PAD_DATABASE=os.getenv("MS_PAD_DATABASE")
+    USER=os.getenv("MS_SQL_USER")
+    PASSWORD=os.getenv("MS_SQL_KEY")
+    DRIVER=os.getenv("MS_SQL_DRIVER")
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'mssql',
+            'NAME': DATABASE,
+            'USER': USER,
+            'PASSWORD': PASSWORD,
+            'HOST': HOST,
+            'PORT': '',
+            'OPTIONS':
+            {
+                'driver':DRIVER,
+                'extra_params' : f'server={HOST}'
+            }
         }
     }
-}
+else:
+    database_name = os.getenv("POSTGRES_DATABASE_DOCKE")
+    database_user = os.getenv("POSTGRESSQL_USER")
+    database_password = os.getenv("POSTGRES_PASSWORD_DOCKER")
+    database_port = os.getenv("POSTGRESSQL_PORT_DOCKER")
+    database_host = os.getenv("POSTGRESSQL_HOST_DOCKER")
+
+    DATABASES = {
+        'default' : {
+            'ENGINE' : 'django.db.backends.postgresql',
+            'NAME' : database_name,
+            'USER' : database_user,
+            'PORT' : database_port,
+            'PASSWORD' : database_password,
+            'HOST' : database_host
+        }
+    }
 
 
 # Password validation
