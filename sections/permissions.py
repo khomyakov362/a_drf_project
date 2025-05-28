@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from users.models import UserRoles
 
+
 class IsModerator(BasePermission):
     message = _('You are not a moderator.')
 
@@ -10,6 +11,7 @@ class IsModerator(BasePermission):
         if hasattr(request.user, 'role'):
             return request.user.role == UserRoles.MODERATOR
         return False
+
 
 class IsSuperuser(BasePermission):
     message = _('You are not a superuser.')

@@ -89,12 +89,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 RUN_IN_DOCKER = os.getenv("RUN_IN_DOCKER") == "True"
 
 if not RUN_IN_DOCKER:
-    HOST=os.getenv("MS_SQL_SERVER")
-    DATABASE=os.getenv("MS_SQL_DATABASE")
-    PAD_DATABASE=os.getenv("MS_PAD_DATABASE")
-    USER=os.getenv("MS_SQL_USER")
-    PASSWORD=os.getenv("MS_SQL_KEY")
-    DRIVER=os.getenv("MS_SQL_DRIVER")
+    HOST = os.getenv("MS_SQL_SERVER")
+    DATABASE = os.getenv("MS_SQL_DATABASE")
+    PAD_DATABASE = os.getenv("MS_PAD_DATABASE")
+    USER = os.getenv("MS_SQL_USER")
+    PASSWORD = os.getenv("MS_SQL_KEY")
+    DRIVER = os.getenv("MS_SQL_DRIVER")
 
     DATABASES = {
         'default': {
@@ -106,8 +106,8 @@ if not RUN_IN_DOCKER:
             'PORT': '',
             'OPTIONS':
             {
-                'driver':DRIVER,
-                'extra_params' : f'server={HOST}'
+                'driver': DRIVER,
+                'extra_params': f'server={HOST}'
             }
         }
     }
@@ -119,13 +119,13 @@ else:
     database_host = os.getenv("POSTGRESSQL_HOST_DOCKER")
 
     DATABASES = {
-        'default' : {
-            'ENGINE' : 'django.db.backends.postgresql',
-            'NAME' : database_name,
-            'USER' : database_user,
-            'PORT' : database_port,
-            'PASSWORD' : database_password,
-            'HOST' : database_host
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': database_name,
+            'USER': database_user,
+            'PORT': database_port,
+            'PASSWORD': database_password,
+            'HOST': database_host
         }
     }
 
@@ -182,16 +182,16 @@ CACHE_ENABLED = cache_status == 'True'
 if CACHE_ENABLED:
     CACHES = {
         'default': {
-            'BACKEND' : 'django.core.cache.backends.redis.RedisCache',
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
             'LOCATION': os.getenv('CACHE_LOCATION'),
         }
     }
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS' : ['django_filters.rest_framework.DjangoFilterBackend',],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',],
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication',],
     # 'DEFAULT_PERMISSION_CLASSES' : ['rest_framework.permissions.IsAuthenticated',],
-    'DEFAULT_PERMISSION_CLASSES' : ['rest_framework.permissions.AllowAny',],
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny',],
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     # 'TEST_REQUEST_RENDERED_CLASSES': [
     #     'rest_framework.renderers.MultiPartRender',
@@ -202,8 +202,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=180),
-    'REFRESH_TOKEN_LIFETIME' : timedelta(days=7),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=180),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
 
 CORS_ALLOWED_ORIGINS = [

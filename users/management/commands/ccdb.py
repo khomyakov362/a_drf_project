@@ -2,6 +2,7 @@ from django.core.management import BaseCommand
 import pyodbc
 from config import settings
 
+
 class Command(BaseCommand):
 
     def handle(self, *args, **options):

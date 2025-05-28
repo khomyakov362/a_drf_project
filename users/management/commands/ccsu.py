@@ -3,6 +3,7 @@ from django.core.management import BaseCommand
 
 from users import models
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
 
@@ -44,6 +45,6 @@ class Command(BaseCommand):
             is_active=True,
         )
 
-        moderator.set_password(os.getenv("MEMBER_PASSWORD"))
-        moderator.save()
+        member.set_password(os.getenv("MEMBER_PASSWORD"))
+        member.save()
         print('Member user created.')
